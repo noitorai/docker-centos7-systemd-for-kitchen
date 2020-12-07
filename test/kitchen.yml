@@ -1,0 +1,20 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: dummy
+
+platforms:
+  - name: centos-7
+    driver_config:
+      volume: /sys/fs/cgroup:/sys/fs/cgroup:ro
+      privileged: true
+      run_command: /usr/sbin/init
+      dockerfile: Dockerfile.test
+
+suites:
+  - name: default
+    verifier:
+      name: shell
+      command: rspec -f d -I spec spec/*_spec.rb

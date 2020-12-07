@@ -1,0 +1,12 @@
+---
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - cd test; bundle install
+
+script:
+  - docker build --no-cache --rm -t centos7-systemd-for-kitchen
+  - cd test; bundle exec kitchen test
